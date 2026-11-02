@@ -259,6 +259,9 @@ export default async function viteConfig(_config: ConfigEnv): Promise<UserConfig
     server: {
       port: 3000,
       host: '0.0.0.0',
+      // 开发服务器要经公网域名反代访问（隧道），Vite 8 默认只放行 IP 和 localhost。
+      // 只列自己的域名，不要写成 true：那等于关掉 DNS rebinding 防护，任何站点都能拉走源码。
+      allowedHosts: ['wyy.os.tlssff.top'],
       watch: {
         // Build output and model weights are not sources, and watching them breaks packaging: the
         // watcher opens a handle on every directory it finds, and electron-builder packages by
